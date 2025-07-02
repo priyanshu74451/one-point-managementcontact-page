@@ -1,0 +1,264 @@
+<!-- Professional Contact Page for One Point Management Solutions -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact | One Point Management Solutions</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: #f4f6f9;
+      animation: fadeIn 1s ease-in;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .container {
+      background: #ffffff;
+      padding: 40px;
+      max-width: 600px;
+      margin: 5vh auto;
+      width: 90%;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+      border-radius: 12px;
+      animation: fadeIn 1.2s ease-in;
+    }
+    .logo img {
+      display: block;
+      margin: 0 auto 20px;
+      width: 220px;
+    }
+    h2 {
+      text-align: center;
+      color: #2e3a59;
+      margin-bottom: 30px;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    input, select, textarea {
+      padding: 12px;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+    input:focus, select:focus, textarea:focus {
+      border-color: #0066cc;
+      box-shadow: 0 0 0 2px rgba(0,102,204,0.1);
+      outline: none;
+    }
+    .submit-btn {
+      background: #62f06d;
+      color: white;
+      border: none;
+      padding: 14px;
+      font-size: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    .submit-btn:hover {
+      background: #5feb5a;
+    }
+    .thankyou-popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      z-index: 9999;
+      text-align: center;
+    }
+    .thankyou-popup.active {
+      display: block;
+    }
+    .thankyou-popup button {
+      margin-top: 20px;
+      background-color: #0066cc;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .icons {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+      gap: 20px;
+    }
+    .icons a {
+      color: #0066cc;
+      font-size: 20px;
+      transition: color 0.3s;
+    }
+    .icons a:hover {
+      color: #003f7d;
+    }
+    @media (max-width: 600px) {
+      .container {
+        padding: 20px;
+      }
+      input, select, textarea {
+        font-size: 0.95rem;
+      }
+      h2 {
+        font-size: 1.4rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="thankyou-popup" id="thankyouPopup">
+    <p id="thankyouText">Thank you! Your message has been submitted.</p>
+    <button onclick="closeThankyou()">OK</button>
+  </div>
+  <div class="container">
+    <div class="logo">
+      <img src="logo.png" alt="One Point Logo">
+    </div>
+    <h2>Contact One Point Management Solutions</h2>
+    <form onsubmit="handleSubmit(event)">
+      <input type="text" id="name" placeholder="Your Name" required />
+      <input type="email" id="email" placeholder="Your Email" required />
+      <select id="category" onchange="showSubcategories()" required>
+        <option value="">Select Category</option>
+        <option value="Quality">Quality</option>
+        <option value="Sustainability">Sustainability</option>
+        <option value="Lab">Lab</option>
+        <option value="Product Certification">Product Certification</option>
+        <option value="Social Compliances">Social Compliances</option>
+        <option value="Food Safety/GMP">Food Safety/GMP</option>
+        <option value="Software and IT'S">Software and IT'S</option>
+      </select>
+      <div id="subcategories"></div>
+      <textarea id="message" placeholder="Write your message..." rows="4" required></textarea>
+      <button class="submit-btn" type="submit">Send via WhatsApp</button>
+    </form>
+    <div class="icons">
+      <a href="https://www.facebook.com/onepointms" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://www.linkedin.com/company/one-point-management-solution" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+      <a href="https://www.instagram.com/onepointms" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="https://twitter.com/onepointms" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a>
+    </div>
+  </div>
+  <script>
+    function closeThankyou() {
+      document.getElementById('thankyouPopup').classList.remove('active');
+    }
+    function showThankyou() {
+      document.getElementById('thankyouPopup').classList.add('active');
+    }
+    function showSubcategories() {
+      const selected = document.getElementById("category").value;
+      const subDiv = document.getElementById("subcategories");
+      let html = "";
+      if (selected === "Quality") {
+        html = `<select id='subcategory' required>
+                  <option value=''>Select Subcategory</option>
+                  <option>ISO 9001</option>
+                  <option>ISO 22163</option>
+                  <option>IATE 16949</option>
+                  <option>AS9100/AS9120/AS9110</option>
+                  <option>ISO13485</option>
+                  <option>TL9000</option>
+                  <option>VDA6.3</option>
+                  <option>Customer specific</option>
+                </select>`;
+      } else if (selected === "Sustainability") {
+        html = `<select id='subcategory' required>
+                  <option value=''>Select Subcategory</option>
+                  <option>ISO 14001</option>
+                  <option>ISO 14064</option>
+                  <option>ISO 14020</option>
+                  <option>ISO 14067</option>
+                  <option>ISO 45001</option>
+                  <option>ISO 50001</option>
+                  <option>Fire Audits</option>
+                  <option>Safety Audits</option>
+                  <option>Electrical Safety Audits</option>
+                  <option>Sustainability Reporting</option>
+                </select>`;
+      } else if (selected === "Lab") {
+        html = `<select id='subcategory' required>
+                  <option value=''>Select Subcategory</option>
+                  <option>Employee Training</option>
+                </select>`;
+      } else if (selected === "Product Certification") {
+        html = `<select id='subcategory' required>
+                  <option value=''>Select Subcategory</option>
+                  <option>CE</option>
+                  <option>UL</option>
+                  <option>S</option>
+                  <option>Ecocert</option>
+                  <option>ISI</option>
+                  <option>Ecomark</option>
+                </select>`;
+      } else if (selected === "Social Compliances") {
+        html = `<select id='subcategory' required>
+                  <option value=''>Select Subcategory</option>
+                  <option>BSCI</option>
+                  <option>SEDEX</option>
+                  <option>CIPAT</option>
+                  <option>Technical Audits</option>
+                  <option>Buyer Specific Compliances (Walmart,Puma,Decathlon etc)</option>
+                </select>`;
+      } else if (selected === "Food Safety/GMP") {
+        html = `<select id='subcategory' required>
+                  <option value=''>Select Subcategory</option>
+                  <option>ISO 22000</option>
+                  <option>FSSC 22000</option>
+                  <option>BRC Food</option>
+                  <option>BRC Packaging</option>
+                </select>`;
+      } else if (selected === "Software and IT'S") {
+        html = `<select id='subcategory' required>
+                  <option value=''>Select Subcategory</option>
+                  <option>ISO 27001</option>
+                  <option>ISO20000</option>
+                  <option>SOC</option>
+                  <option>GDPR</option>
+                  <option>HIPPA</option>
+                </select>`;
+      }
+      subDiv.innerHTML = html;
+    }
+    async function handleSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const category = document.getElementById('category').value;
+      const subcategory = document.getElementById('subcategory')?.value || '';
+      const message = document.getElementById('message').value;
+      const fullMessage = `Hi, I am ${name} (Email: ${email}). I’m interested in ${category} - ${subcategory}. Query: ${message}`;
+
+      const whatsappUrl = `https://wa.me/917007293169?text=${encodeURIComponent(fullMessage)}`;
+      window.open(whatsappUrl, '_blank');
+
+      await fetch("https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec", {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, category, subcategory, message })
+      });
+
+      showThankyou();
+    }
+  </script>
+</body>
+</html>
